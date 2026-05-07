@@ -11,9 +11,8 @@ const RETRY_DELAY_MS = 5000;
  * Connect to MongoDB with automatic retry.
  * On failure, retries up to MAX_RETRIES before exiting the process.
  */
-const { MongoMemoryServer } = require('mongodb-memory-server');
-
 let mongoServer = null;
+
 
 const connectDB = async () => {
   let attempt = 0;
@@ -52,9 +51,11 @@ const connectDB = async () => {
       if (attempt >= 2) {
         console.log("⚠️ Switching to in-memory MongoDB server for demo purposes...");
         try {
+          const { MongoMemoryServer } = require('mongodb-memory-server');
           mongoServer = await MongoMemoryServer.create();
           const memoryUri = mongoServer.getUri();
           const conn = await mongoose.connect(memoryUri);
+
           console.log(`✅ In-Memory MongoDB connected: ${conn.connection.host}`);
           return conn;
         } catch (memError) {
