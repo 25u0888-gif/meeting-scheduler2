@@ -115,12 +115,15 @@ app.use(compression());
 app.use(
   cors({
     origin: (origin, callback) => {
+      if (origin) console.log(`🌍 Incoming request from origin: ${origin}`);
       if (!origin || allowedOrigins.indexOf(origin) !== -1) {
         callback(null, true);
       } else {
+        console.warn(`🚫 CORS blocked for origin: ${origin}. Allowed: ${allowedOrigins.join(', ')}`);
         callback(new Error("Not allowed by CORS"));
       }
     },
+
     credentials: true,
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
