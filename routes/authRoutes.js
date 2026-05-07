@@ -105,6 +105,8 @@ router.get("/me", protect, getMe);
 router.put("/profile", protect, updateProfile);
 router.post("/google/callback", protect, googleCallback);
 router.get("/users", protect, authorizeRoles("admin", "host"), getUsers);
+router.get("/user/:username", getUserByUsername);
+
 
 
 module.exports = router;

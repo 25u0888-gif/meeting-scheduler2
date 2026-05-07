@@ -60,7 +60,7 @@ router.use(protect);
  *       409:
  *         description: Conflict (meeting or slot conflict)
  */
-router.post("/book", bookingLimiter, authorizeRoles("host", "admin"), bookMeeting);
+router.post("/book", bookingLimiter, authorizeRoles("member", "host", "admin"), bookMeeting);
 
 /**
  * @swagger

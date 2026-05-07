@@ -43,7 +43,8 @@ function App() {
               <Route path="/signup" element={<SignupPage />} />
               
               <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
-              <Route path="/book/:user" element={<HostRoute><BookingPage /></HostRoute>} />
+              <Route path="/book/:user" element={<ProtectedRoute><BookingPage /></ProtectedRoute>} />
+
               <Route path="/availability" element={<HostRoute><AvailabilitySetup /></HostRoute>} />
               <Route path="/meetings" element={<ProtectedRoute><MeetingsManagement /></ProtectedRoute>} />
               <Route path="/organizations" element={<AdminRoute><Organizations /></AdminRoute>} />

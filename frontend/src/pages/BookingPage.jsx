@@ -270,25 +270,6 @@ const BookingPage = () => {
   
   if (loading) return <div className="loading-screen">Preparing your scheduling experience...</div>;
 
-  // -- RBAC: Block members from scheduling --
-  if (currentUserRole === 'member') {
-    return (
-      <div className="booking-page">
-        <div className="booking-container glass-card" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '4rem' }}>
-          <AlertTriangle size={64} color="#f59e0b" style={{ marginBottom: '1.5rem', opacity: 0.8 }} />
-          <h2 style={{ fontSize: '2rem', fontWeight: '800', marginBottom: '1rem' }}>Access Restricted</h2>
-          <p style={{ color: 'var(--text-muted)', fontSize: '1.1rem', maxWidth: '500px', lineHeight: '1.6' }}>
-            Scheduling privileges are restricted to admins and hosts. 
-            Members can only join meetings they have been invited to.
-          </p>
-          <button className="btn-primary" style={{ marginTop: '2rem' }} onClick={() => navigate('/dashboard')}>
-            Back to Dashboard
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   const isAdminOrHost = currentUserRole === 'admin' || currentUserRole === 'host';
 
   return (

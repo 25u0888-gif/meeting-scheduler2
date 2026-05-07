@@ -308,5 +308,20 @@ const getUsers = asyncHandler(async (req, res) => {
   sendSuccess(res, 200, "Users retrieved successfully", { users });
 });
 
-module.exports = { register, login, getMe, updateProfile, demoLogin, googleCallback, getUsers };
+const getUserByUsername = asyncHandler(async (req, res) => {
+  const { username } = req.params;
+  
+  // Try finding by name (case-insensitive)
+  const user = await User.findOne({ 
+    name: { $regex: new RegExp(`^${username}$`, "i") } 
+  });
+
+  if (!user) {
+    throw new ApiError("User not found", 404);
+  }
+
+  sendSuccess(res, 200, "User found", { user: sanitizeUser(user) });
+});
+
+module.exports = { register, login, getMe, updateProfile, demoLogin, googleCallback, getUsers, getUserByUsername };
 
