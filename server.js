@@ -49,7 +49,7 @@ const NODE_ENV = process.env.NODE_ENV || "development";
 
 // CORS Origins — support comma-separated list in env
 const allowedOrigins = process.env.CLIENT_URL
-  ? process.env.CLIENT_URL.split(",").map((url) => url.trim())
+  ? process.env.CLIENT_URL.split(",").map((url) => url.trim().replace(/\/$/, ""))
   : ["http://localhost:5173"];
 
 // ── Validate critical env vars at boot ────────────────────────
@@ -144,6 +144,10 @@ app.use("/api", globalLimiter);
 // ─────────────────────────────────────────────────────────────
 // ROUTES
 // ─────────────────────────────────────────────────────────────
+
+app.get("/", (req, res) => {
+  res.status(200).send("Lumina Scheduler Backend is Running");
+});
 
 app.get("/api/health", (req, res) => {
   const dbState = mongoose.connection.readyState;
