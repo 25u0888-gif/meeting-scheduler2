@@ -291,7 +291,10 @@ const BookingPage = () => {
 
   const isAdminOrHost = currentUserRole === 'admin' || currentUserRole === 'host';
 
+  return (
+    <div className="booking-page">
       <div className="booking-container glass-card">
+
         {/* Sidebar Info */}
         <div className="booking-sidebar">
           <div className="host-info">
